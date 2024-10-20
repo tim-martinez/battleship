@@ -1,6 +1,6 @@
-// src/sum.js
-export function sum(a, b) {
-  return a + b;
-}
+import { Ship } from './modules/ship';
 
-console.log('battleship');
+const tug = new Ship(2);
+
+tug.hit();
+console.log(tug);
