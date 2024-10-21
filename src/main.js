@@ -1,6 +1,13 @@
-import { Ship } from './modules/ship';
+import { Ship } from './modules/ship.js';
+import { Board } from './modules/board.js';
 
-const tug = new Ship(2);
+// Ships
+// 1	Carrier	5
+// 2	Battleship	4
+// 3	Cruiser	3
+// 4	Submarine	3
+// 5	Destroyer	2
 
-tug.hit();
-console.log(tug);
+const board = new Board(10);
+
+board.print();

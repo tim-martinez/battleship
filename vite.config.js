@@ -1,5 +1,6 @@
 // vite.config.js
 import { defineConfig } from 'vite';
+import eslintPlugin from 'vite-plugin-eslint';
 
 export default defineConfig({
   test: {
@@ -10,4 +11,5 @@ export default defineConfig({
   server: {
     open: true, // This will open the browser automatically
   },
+  plugins: [eslintPlugin()],
 });
