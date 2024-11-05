@@ -1,0 +1,119 @@
+:root {
+  /* Dark theme background and base colors */
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-overlay: #2c2c2c;
+  --color-border: #333333;
+  --color-text: #e0e0e0;
+  --color-text-muted: #b0b0b0;
+
+  /* Primary and secondary colors */
+  --color-primary: #bb86fc;
+  --color-secondary: #03dac5;
+  --color-accent: #ff0266;
+
+  /* Success, warning, and error colors */
+  --color-success: #4caf50;
+  --color-warning: #ffc107;
+  --color-error: #cf6679;
+
+  /* Colorful options for different elements */
+  --color-info: #2196f3;
+  --color-highlight: #ffeb3b;
+  --color-link: #8ab4f8;
+
+  /* Additional colorful accents */
+  --color-purple: #7c4dff;
+  --color-teal: #64ffda;
+  --color-orange: #ff7043;
+  --color-pink: #f50057;
+  --color-lime: #c6ff00;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #bb86fc 0%, #6200ea 100%);
+  --gradient-accent: linear-gradient(135deg, #ff0266 0%, #d500f9 100%);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: var(--color-background);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: var(--color-text);
+}
+
+.header {
+  background-color: var(--color-surface);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer {
+  background-color: var(--color-surface);
+  height: 50px;
+}
+
+.player1.container,
+.player2.container {
+  /* width: 100%; */
+  background-color: var(--color-overlay);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.board {
+  background-color: var(--color-surface);
+  border-radius: 5px;
+  border: 1px solid var(--color-border);
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(10, minmax(20px, 40px));
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.player-name {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.cell {
+  border: 1px solid var(--color-info);
+  box-sizing: border-box;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell:hover {
+  border: 1px solid var(--color-text);
+}
+
+.missle {
+  height: 25%;
+  width: 25%;
+  background-color: white;
+  border-radius: 50%;
+}

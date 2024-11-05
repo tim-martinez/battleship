@@ -1,13 +1,22 @@
-// import { Ship } from './modules/ship.js';
-import { Board } from './modules/board.js';
+import { Player } from './modules/player.js';
+import * as GUI from './modules/GUI.js';
 
-// Ships
-// 1	Carrier	5
-// 2	Battleship	4
-// 3	Cruiser	3
-// 4	Submarine	3
-// 5	Destroyer	2
+const player1 = new Player('Tim', 'human');
+const player2 = new Player('bob', 'human');
 
-const board = new Board(10);
+player1.board.placeShip(player1.ships.destroyer, 0, 0, true);
+player1.board.placeShip(player1.ships.submarine, 0, 1, true);
+player1.board.placeShip(player1.ships.carrier, 5, 5, true);
 
-board.print();
+player2.board.placeShip(player1.ships.destroyer, 0, 0);
+player2.board.placeShip(player1.ships.submarine, 2, 0);
+player2.board.placeShip(player1.ships.carrier, 5, 5);
+
+GUI.displayBoards(
+  player1.board,
+  player1.board.shipsXY,
+  player2.board,
+  player2.board.shipsXY,
+);
+
+GUI.attack(player2);

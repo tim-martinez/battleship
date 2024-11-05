@@ -1,23 +1,32 @@
-import { Ship } from './ship.js';
-
 export class Board {
   constructor(size) {
     this.size = size;
     this.grid = Array.from({ length: size }, () => Array(size).fill(null));
+    this.missedXY = [];
+    this.hitXY = [];
+    this.ships = null;
+    this.shipsXY = [];
+  }
+
+  checkLose() {
+    if (this.ships === 0) {
+      return true;
+    }
+    return false;
   }
 
   //print game in console
-  print() {
-    this.grid.forEach((element) => {
-      const updatedElement = element.map((item) => {
-        if (item === null) {
-          return '[ ]';
-        }
-        return '[S]';
-      });
-      console.log(updatedElement.join(''));
-    });
-  }
+  // print() {
+  //   this.grid.forEach((element) => {
+  //     const updatedElement = element.map((item) => {
+  //       if (item === null) {
+  //         return '[ ]';
+  //       }
+  //       return '[S]';
+  //     });
+  //     console.log(updatedElement.join(''));
+  //   });
+  // }
 
   placeShip(ship, x, y, horizontal) {
     if (!this.isValidPlacement(ship, x, y, horizontal)) {
@@ -27,13 +36,20 @@ export class Board {
     if (horizontal) {
       for (let i = 0; i < ship.length; i++) {
         this.grid[y][x + i] = ship;
+        this.shipsXY.push([x + i, y]);
+        // console.log('Updated shipsXY:', this.shipsXY);
       }
     } else {
       for (let i = 0; i < ship.length; i++) {
         this.grid[y + i][x] = ship;
+        this.shipsXY.push([x, y + i]);
+        // console.log('Updated shipsXY:', this.shipsXY);
       }
     }
 
+    this.ships++;
+
+    //ship placed succesfully
     return true;
   }
 
@@ -54,6 +70,34 @@ export class Board {
       }
     }
 
+    //valid ship placement
     return true;
+  }
+
+  attack(x, y) {
+    if (
+      this.hitXY.some((element) => element[0] === x && element[1] === y) ||
+      this.missedXY.some((element) => element[0] === x && element[1] === y)
+    ) {
+      //this coordinate has already been attacked, return false
+      return false;
+    }
+
+    if (this.grid[y][x] === null) {
+      this.missedXY.push([x, y]);
+      return true;
+    } else {
+      const ship = this.grid[y][x];
+      this.hitXY.push([x, y]);
+      ship.hit();
+
+      if (ship.status === 'sunk') {
+        this.ships--;
+        return ship;
+      }
+
+      //good hit
+      return true;
+    }
   }
 }
