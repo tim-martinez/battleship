@@ -5,13 +5,12 @@ function displayBoards(board1, ships, board2, ships2) {
   board1.grid.forEach((element, y) => {
     element.forEach((item, x) => {
       const cell = document.createElement('div');
-      cell.dataset.cell = `${x}-${y}`;
+      cell.dataset.x = x;
+      cell.dataset.y = y;
 
       cell.classList.add('cell');
       if (displayShips(ships, x, y)) {
-        cell.dataset.cell = `${x}-${y}`;
         cell.style.border = '1px solid white';
-        // cell.style.backgroundColor = 'grey';
       }
 
       player1.append(cell);
@@ -43,9 +42,14 @@ function displayShips(ships, x, y) {
   return false;
 }
 
-function attack(player) {
-  const playerBoard = document.querySelector('.player2.board');
+function attack(player1, player2) {
+  const player2Board = document.querySelector('.player2.board');
+  const player1Board = document.querySelector('.player1.board');
+  humanAttack(player2, player2Board);
+  humanAttack(player1, player1Board);
+}
 
+function humanAttack(player, playerBoard) {
   playerBoard.addEventListener('click', (event) => {
     if (
       event.target.classList.contains('cell') &&
