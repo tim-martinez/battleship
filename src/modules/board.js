@@ -15,23 +15,23 @@ export class Board {
     return false;
   }
 
-  //print game in console
-  // print() {
-  //   this.grid.forEach((element) => {
-  //     const updatedElement = element.map((item) => {
-  //       if (item === null) {
-  //         return '[ ]';
-  //       }
-  //       return '[S]';
-  //     });
-  //     console.log(updatedElement.join(''));
-  //   });
-  // }
+  removeShip(ship) {
+    // Check if ship type already exists and erase it
+    for (let row = 0; row < this.grid.length; row++) {
+      for (let col = 0; col < this.grid[row].length; col++) {
+        if (this.grid[row][col] && this.grid[row][col].name === ship.name) {
+          this.grid[row][col] = null;
+        }
+      }
+    }
+  }
 
   placeShip(ship, x, y, horizontal) {
     if (!this.isValidPlacement(ship, x, y, horizontal)) {
       return false;
     }
+
+    this.removeShip(ship);
 
     if (horizontal) {
       for (let i = 0; i < ship.length; i++) {
